@@ -133,6 +133,11 @@ var loadGS = (function () {
 	function load(id) {
 		sheets[id] = sheets[id] || getWorksheets(id);
 
+		sheets[id].catch(function () {
+			// If there's an error, remove the cache so we can try again
+			delete sheets[id];
+		});
+
 		return sheets[id];
 	}
 
