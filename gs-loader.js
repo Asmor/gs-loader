@@ -16,8 +16,15 @@ var loadGS = (function () {
 
 			var script = document.createElement("script");
 			script.src = url + "?alt=json-in-script&callback=" + callbackName;
+
 			script.addEventListener("load", function () {
 				this.parentNode.removeChild(this);
+			}, false);
+
+			script.addEventListener("error", function (eventData) {
+				this.parentNode.removeChild(this);
+				delete window[callbackName];
+				reject(eventData);
 			}, false);
 
 			document.head.appendChild(script);
