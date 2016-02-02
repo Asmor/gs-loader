@@ -34,6 +34,10 @@ var loadGS = (function () {
 	}
 
 	function getContents(data) {
+		if ( !data ) {
+			return {};
+		}
+
 		// Step 1: Get all the data as a two-dimensional array
 		var cols = [];
 		data.forEach(function (cell) {
